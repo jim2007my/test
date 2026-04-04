@@ -3,554 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>رفيق المسلم</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Amiri+Quran&display=swap" rel="stylesheet">
+    <title>اتجاه القبلة - رفيق المسلم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    
-    /* منع تحديد (تظليل) النصوص في جميع المتصفحات */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    
-    /* منع ظهور المربع الرمادي/الأزرق عند الضغط على الأزرار والروابط في الهواتف */
-    -webkit-tap-highlight-color: transparent;
-    
-    /* منع التكبير بالنقر المزدوج السريع */
-    touch-action: manipulation;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 
-input, textarea {
-    -webkit-user-select: auto;
-    -moz-user-select: auto;
-    -ms-user-select: auto;
-    user-select: auto;
-}
-
-body {
-            font-family: 'Cairo', sans-serif;
-            background: #F4F6F5; /* لون خلفية مريح جداً للعين */
-            min-height: 100vh;
-            color: #2C3E35; /* أخضر رمادي داكن هادئ */
-            position: relative;
-            overflow-x: hidden;
-            padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important; 
+        body {
+            font-family: 'Cairo', sans-serif; background: #F4F6F5; min-height: 100vh; color: #2C3E35;
+            position: relative; overflow-x: hidden; display: flex; align-items: center; justify-content: center;
+            padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
         }
 
-        /* خلفية مزخرفة أنيقة جداً وشفافة */
         body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" opacity="0.02"><path fill="none" stroke="%232C3E35" stroke-width="1" d="M400 50 L450 150 L550 150 L475 225 L500 325 L400 275 L300 325 L325 225 L250 150 L350 150 Z M400 50 L400 275 M475 225 L325 225 M500 325 L300 325 M450 150 L350 150"/><circle cx="400" cy="400" r="80" stroke="%232C3E35" fill="none"/><circle cx="400" cy="400" r="120" stroke="%232C3E35" fill="none" stroke-dasharray="5 5"/></svg>');
-            background-repeat: repeat;
-            pointer-events: none;
-            z-index: 0;
+            pointer-events: none; z-index: 0;
         }
 
-        /* ظلال ضوئية عصرية وأنعم بكثير */
         .bg-glow {
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            background: rgba(44, 62, 53, 0.08); /* لون أهدى */
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: 0;
-            bottom: -50px;
-            left: -100px;
+            position: fixed; width: 300px; height: 300px; background: rgba(44, 62, 53, 0.08);
+            border-radius: 50%; filter: blur(100px); z-index: 0; bottom: -50px; left: -80px;
             animation: floatGlow 12s infinite alternate ease-in-out;
         }
-        .bg-glow.right {
-            top: -100px;
-            right: -100px;
-            left: auto;
-            bottom: auto;
-            background: rgba(184, 155, 94, 0.06); /* ذهبي مطفي جداً */
-            animation-delay: -6s;
-        }
-        @keyframes floatGlow {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
-            100% { transform: translate(20px, 40px) scale(1.1); opacity: 1; }
-        }
+        .bg-glow.right { top: -80px; right: -80px; left: auto; bottom: auto; background: rgba(184, 155, 94, 0.08); animation-delay: -6s; }
+        @keyframes floatGlow { 0% { transform: translate(0, 0) scale(1); opacity: 0.6; } 100% { transform: translate(15px, 30px) scale(1.1); opacity: 1; } }
 
-        .container {
-            max-width: 520px;
-            margin: 0 auto;
-            padding: 50px 20px 30px;
-            position: relative;
-            z-index: 5;
-            animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .container { width: 100%; max-width: 480px; margin: 0 auto; padding: 20px 15px; position: relative; z-index: 5; animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .glass-card:last-child {
-            margin-bottom: 0;
-        }
-
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* بطاقات زجاجية باحترافية عالية */
         .glass-card {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 16px 40px -10px rgba(44, 62, 53, 0.06);
-            padding: 40px 24px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.9); padding: 35px 20px;
+            box-shadow: 0 16px 40px -10px rgba(44, 62, 53, 0.06); text-align: center;
+            display: flex; flex-direction: column; align-items: center; gap: 20px;
         }
 
-        /* رأس الصفحة */
-        .welcome-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 16px;
+        .header-title { font-size: 1.8rem; font-weight: 900; color: #1A2B22; letter-spacing: -0.5px; margin-bottom: 5px; }
+        
+        .status-badge {
+            background: rgba(234, 236, 235, 0.8); padding: 8px 18px; border-radius: 20px;
+            font-size: 0.9rem; font-weight: 700; color: #4A5D53; border: 1px solid rgba(44, 62, 53, 0.05);
+            transition: all 0.4s ease; display: inline-flex; align-items: center; gap: 8px;
         }
-        .greeting h2 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #1A2B22; /* لون داكن وأكثر تركيزاً */
-            letter-spacing: -0.5px;
-        }
-        .greeting p {
-            font-size: 0.85rem;
-            color: rgba(44, 62, 53, 0.6);
-            font-weight: 500;
-        }
-        .logo-icon {
-            background: #FFFFFF;
-            width: 54px;
-            height: 54px;
-            border-radius: 20px; /* شكل عصري أكثر من الدائرة الكاملة */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: #2C3E35;
-            border: 1px solid rgba(44, 62, 53, 0.08);
-            box-shadow: 0 8px 20px rgba(44, 62, 53, 0.05);
+        .status-badge.success { background: rgba(184, 155, 94, 0.15); color: #8A6D3B; border-color: rgba(184, 155, 94, 0.3); box-shadow: 0 4px 15px rgba(184, 155, 94, 0.2); }
+
+        /* ----- تصميم البوصلة ----- */
+        .compass-wrapper {
+            position: relative; width: 280px; height: 280px; margin: 25px auto;
+            border-radius: 50%; background: #F4F6F5;
+            box-shadow: inset 0 0 20px rgba(44, 62, 53, 0.05), 0 15px 35px rgba(0,0,0,0.06);
+            border: 6px solid #FFFFFF; display: flex; align-items: center; justify-content: center;
+            transition: all 0.4s ease;
         }
 
-        /* تاريـخ مزدوج */
-        .date-luxury {
-            display: flex;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
-            padding: 10px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-            gap: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-        }
-        .date-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            background: #FFFFFF;
-            padding: 8px 16px;
-            border-radius: 14px;
-            color: #4A5D53;
-            box-shadow: 0 4px 12px rgba(44, 62, 53, 0.03);
-            flex: 1;
-            justify-content: center;
-        }
-        .date-item i {
-            font-size: 0.9rem;
-            color: #B89B5E; /* ذهبي هادئ */
+        /* تأثير الإضاءة عند الوصول للقبلة */
+        .compass-wrapper.correct {
+            border-color: #B89B5E;
+            box-shadow: inset 0 0 30px rgba(184, 155, 94, 0.15), 0 0 40px rgba(184, 155, 94, 0.3);
+            transform: scale(1.02);
         }
 
-        /* آية اليوم */
-        .verse-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,249,0.7) 100%);
-            border-right: 4px solid #B89B5E;
-        }
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 18px;
-            color: #1A2B22;
-            border-right: 3px solid #B89B5E;
-            padding-right: 12px;
-            opacity: 0.9;
-        }
-        .verse-text {
-            font-family: 'Amiri Quran', 'Amiri', serif;
-            font-size: 1.5rem;
-            line-height: 1.8;
-            text-align: center;
-            margin: 16px 0;
-            color: #1A2B22;
-            font-weight: 400;
-            word-spacing: 2px;
-        }
-        .verse-ref {
-            text-align: left;
-            font-size: 0.8rem;
-            color: #B89B5E;
-            font-weight: 700;
-            margin-top: 12px;
-            letter-spacing: 0.5px;
-            opacity: 0.9;
+        /* مؤشرات الاتجاهات (شمال، جنوب..) */
+        .compass-dial {
+            position: absolute; width: 100%; height: 100%; border-radius: 50%;
+            transition: transform 0.1s linear; /* حركة البوصلة */
         }
 
-        /* --- بطاقة الصلاة على النبي --- */
-        .salawat-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(244,246,245,0.7) 100%);
-            border-right: 4px solid #5C7768;
-        }
-        .salawat-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: #1A2B22;
-            border-right: 3px solid #5C7768;
-            padding-right: 12px;
-            opacity: 0.9;
-        }
-        .salawat-text {
-            font-family: 'Amiri Quran', 'Amiri', serif;
-            font-size: 1.35rem;
-            line-height: 1.9;
-            text-align: center;
-            margin: 16px 0 10px;
-            color: #2C3E35;
-            font-weight: 500;
+        .compass-mark { position: absolute; font-weight: 900; color: rgba(44, 62, 53, 0.4); font-size: 1.3rem; transform: translate(-50%, -50%); }
+        .mark-n { top: 20px; left: 50%; color: #A5281B; } /* الشمال بلون مميز */
+        .mark-e { top: 50%; right: 5px; }
+        .mark-s { bottom: 0px; left: 50%; }
+        .mark-w { top: 50%; left: 20px; }
+
+        /* سهم القبلة الداخلي */
+        .qibla-arrow-container { position: absolute; width: 100%; height: 100%; transition: transform 0.1s linear; z-index: 10; }
+
+        .qibla-pointer {
+            position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
 
-.bottom-nav-fixed {
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0;
-    right: 0;
-    width: 100%;
-    
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px); 
-    border-top: 1px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 -10px 40px rgba(44, 62, 53, 0.04);
-    
-    z-index: 99999 !important; 
-    
-    padding: 8px 16px env(safe-area-inset-bottom, 6px) !important;
-    
-    transform: translate3d(0, 0, 0) !important; 
-    -webkit-transform: translate3d(0, 0, 0) !important;
-    will-change: transform; 
-    contain: layout; 
-}
-
-        .nav-inner {
-            max-width: 520px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-around; /* توزيع أفضل */
-            align-items: center;
-            gap: 8px;
+        /* أيقونة الكعبة */
+        .kaaba-icon {
+            width: 42px; height: 48px; background: #1A2B22; border-radius: 4px; position: relative;
+            display: flex; align-items: center; justify-content: center;
         }
+        .kaaba-icon::before { content: ''; position: absolute; top: 12px; left: 0; width: 100%; height: 4px; background: #B89B5E; }
+        
+        .guide-line { width: 3px; height: 80px; background: linear-gradient(to bottom, #B89B5E, transparent); margin-top: 5px; border-radius: 2px; }
 
-        /* عناصر التنقل */
+        /* زر البدء */
+        .start-btn {
+            background: #1A2B22; color: white; border: none; padding: 16px 35px; border-radius: 24px;
+            font-size: 1.1rem; font-weight: 800; font-family: 'Cairo', sans-serif;
+            box-shadow: 0 10px 25px rgba(26, 43, 34, 0.2); cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; gap: 10px; margin-top: 15px; width: 100%; justify-content: center;
+        }
+        .start-btn:active { transform: scale(0.95); }
+
+        /* الشريط السفلي */
+        .bottom-nav-fixed {
+            position: fixed !important; bottom: 0 !important; left: 0; right: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); 
+            border-top: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 -10px 30px rgba(44, 62, 53, 0.04);
+            z-index: 99999 !important; padding: 8px 8px calc(24px + env(safe-area-inset-bottom, 0px)) !important;
+            transform: translate3d(0, 0, 0) !important; 
+        }
+        .nav-inner { max-width: 520px; margin: 0 auto; display: flex; justify-content: space-around; align-items: center; gap: 2px; }
         .nav-item-bottom {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            text-decoration: none;
-            color: #8C9E95; /* لون باهت للعناصر غير النشطة */
-            background: transparent;
-            border-radius: 20px;
-            padding: 6px 0;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
-            border: none;
-            font-family: 'Cairo', sans-serif;
+            flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 4px; text-decoration: none; color: #8C9E95; background: transparent; border-radius: 16px;
+            padding: 6px 0; transition: all 0.2s ease; font-family: 'Cairo', sans-serif;
         }
+        .nav-item-bottom i { font-size: 1.15rem; transition: transform 0.2s; }
+        .nav-item-bottom span { font-weight: 600; font-size: 0.6rem; letter-spacing: -0.2px; opacity: 0.9; }
+        .nav-item-bottom.active { color: #2C3E35; }
+        .nav-item-bottom.active i { color: #B89B5E; transform: translateY(-2px); font-size: 1.25rem;}
+        .nav-item-bottom.active span { color: #1A2B22; font-weight: 800; }
 
-        .nav-item-bottom i {
-            font-size: 1.3rem;
-            transition: transform 0.3s;
-        }
-
-        .nav-item-bottom span {
-            font-weight: 600;
-            font-size: 0.7rem;
-            letter-spacing: -0.2px;
-            opacity: 0.9;
-        }
-
-        .nav-item-bottom:hover {
-            color: #4A5D53;
-        }
-
-        .nav-item-bottom:active {
-            transform: scale(0.92);
-        }
-
-        .nav-item-bottom.active {
-            color: #2C3E35;
-        }
-        .nav-item-bottom.active i {
-            color: #B89B5E;
-            transform: translateY(-2px);
-        }
-        .nav-item-bottom.active span {
-            color: #1A2B22;
-            font-weight: 700;
-        }
-
-        /* لودر راقي جداً */
-        #loader-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #F4F6F5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            flex-direction: column;
-            gap: 20px;
-            backdrop-filter: blur(10px);
-        }
-        .loader-spinner {
-            width: 44px;
-            height: 44px;
-            border: 3px solid rgba(184, 155, 94, 0.15);
-            border-top: 3px solid #B89B5E;
-            border-radius: 50%;
-            animation: spin 0.8s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-@media (max-width: 480px) {
-            .container { padding: 45px 16px 20px; }
-            .verse-text { font-size: 1.35rem; }
-            .salawat-text { font-size: 1.25rem; }
-            .nav-item-bottom i { font-size: 1.25rem; }
-            .nav-item-bottom span { font-size: 0.65rem; }
-            .glass-card { padding: 30px 20px; border-radius: 24px; }
-.bottom-nav-fixed {
-    padding: 8px 10px env(safe-area-inset-bottom, 6px) !important;
-}
+        @media (max-width: 480px) {
+            .compass-wrapper { width: 240px; height: 240px; }
+            .bottom-nav-fixed { padding: 8px 10px calc(24px + env(safe-area-inset-bottom, 0px)) !important; }
         }
     </style>
 </head>
 <body>
-<div class="bg-glow"></div>
-<div class="bg-glow right"></div>
+    <div class="bg-glow"></div>
+    <div class="bg-glow right"></div>
 
-<div id="loader-overlay">
-    <div class="loader-spinner"></div>
-    <div style="color:#2C3E35; font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px;">رفيق المسلم</div>
-</div>
+    <div class="container">
+        <div class="glass-card">
+            
+            <h1 class="header-title">اتجاه القبلة</h1>
+            <div id="status-message" class="status-badge"><i class="fas fa-location-arrow"></i> اضغط لتحديد الموقع وبدء البوصلة</div>
 
-<div class="container" id="mainContainer" style="display: none;">
-    <div class="glass-card" style="padding-bottom: 20px;">
-        <div class="welcome-header">
-<div class="greeting" style="display: flex; align-items: center; gap: 15px;">
-    <h2>رفيق المسلم</h2>
-    <a href="contact.html" style="color: #B89B5E; font-size: 1.2rem; text-decoration: none;">
-        <i class="far fa-question-circle"></i>
-    </a>
-</div>
-            <div class="logo-icon">
-                <i class="fas fa-mosque"></i>
+            <button id="start-btn" class="start-btn">
+                <i class="fas fa-location-crosshairs"></i> تحديد القبلة الآن
+            </button>
+
+            <div id="compass-ui" style="display: none; width: 100%;">
+                <div id="compass-wrapper" class="compass-wrapper">
+                    <div id="compass-dial" class="compass-dial">
+                        <div class="compass-mark mark-n">N</div>
+                        <div class="compass-mark mark-e">E</div>
+                        <div class="compass-mark mark-s">S</div>
+                        <div class="compass-mark mark-w">W</div>
+                    </div>
+                    <div id="qibla-arrow" class="qibla-arrow-container">
+                        <div class="qibla-pointer">
+                            <div class="kaaba-icon"></div>
+                            <div class="guide-line"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="date-luxury">
-            <div class="date-item" id="hijriDateSpan"><i class="fas fa-moon"></i> جاري التحميل...</div>
-            <div class="date-item" id="gregorianDateSpan"><i class="fa-regular fa-calendar-alt"></i> ...</div>
+
         </div>
     </div>
 
-    <div class="glass-card verse-card">
-        <div class="section-title">
-            <span>آية اليوم</span>
+    <div class="bottom-nav-fixed">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-item-bottom">
+                <i class="fas fa-home"></i><span>الرئيسية</span>
+            </a>
+            <a href="quran.html" class="nav-item-bottom">
+                <i class="fas fa-book-open"></i><span>المصحف</span>
+            </a>
+            <a href="azkar.html" class="nav-item-bottom">
+                <i class="fas fa-hands-praying"></i><span>الأذكار</span>
+            </a>
+            <a href="qibla.html" class="nav-item-bottom active">
+                <i class="fas fa-kaaba"></i><span>القبلة</span>
+            </a>
+            <a href="prayer.html" class="nav-item-bottom">
+                <i class="fas fa-mosque"></i><span>مواقيت</span>
+            </a>
         </div>
-        <div class="verse-text" id="ayahText">
-            "فَقَالُوا عَلَى اللَّهِ تَوَكَّلْنَا رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِلْقَوْمِ الظَّالِمِينَ"
-        </div>
-        <div class="verse-ref" id="ayahRef">سورة يونس · 85</div>
     </div>
-    
-    <div class="glass-card salawat-card">
-        <div class="salawat-title">
-            <span>عطّر فمك</span>
-        </div>
-        <div class="salawat-text">
-            اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ عَدَدَ مَا ذَكَرَهُ الذَّاكِرُونَ، وَغَفَلَ عَنْ ذِكْرِهِ الْغَافِلُونَ
-        </div>
-    </div>
 
-</div>
+    <script>
+        // إحداثيات الكعبة المشرفة الدقيقة
+        const MECCA_LAT = 21.422487;
+        const MECCA_LNG = 39.826206;
 
-<div class="bottom-nav-fixed" id="bottomNavBar">
-    <div class="nav-inner">
-        <a href="#" class="nav-item-bottom" id="homeNavBtn">
-            <i class="fas fa-home"></i>
-            <span>الرئيسية</span>
-        </a>
-        <a href="quran.html" class="nav-item-bottom" id="quranNavBtn">
-            <i class="fas fa-book-open"></i>
-            <span>المصحف</span>
-        </a>
-        <a href="prayer.html" class="nav-item-bottom" id="prayerNavBtn">
-            <i class="fas fa-mosque"></i>
-            <span>مواقيت</span>
-        </a>
-        <a href="radio.html" class="nav-item-bottom" id="radioNavBtn">
-            <i class="fas fa-radio"></i>
-            <span>الراديو</span>
-        </a>
-    </div>
-</div>
+        let userLat = null;
+        let userLng = null;
+        let qiblaAngle = 0;
 
-<script>
-// ----------------------------- 1. مكتبة الآيات المتنوعة (30 يوم) ---------------------------------
-    const versesLibrary = [
-        { text: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", ref: "البقرة · 201" },
-        { text: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", ref: "البقرة · 153" },
-        { text: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ", ref: "الطلاق · 2-3" },
-        { text: "فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ", ref: "البقرة · 152" },
-        { text: "قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَىٰ أَنفُسِهِمْ لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ", ref: "الزمر · 53" },
-        { text: "وَأَن لَّيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ", ref: "النجم · 39" },
-        { text: "فَقَالُوا عَلَى اللَّهِ تَوَكَّلْنَا رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِلْقَوْمِ الظَّالِمِينَ", ref: "يونس · 85" },
-        { text: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً", ref: "آل عمران · 8" },
-        { text: "وَاللَّهُ غَالِبٌ عَلَىٰ أَمْرِهِ وَلَٰكِنَّ أَكْثَرَ النَّاسِ لَا يَعْلَمُونَ", ref: "يوسف · 21" },
-        { text: "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا", ref: "البقرة · 286" },
-        { text: "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا * إِنَّ مَعَ الْعُسْرِ يُسْرًا", ref: "الشرح · 5-6" },
-        { text: "وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ", ref: "غافر · 60" },
-        { text: "وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ", ref: "الأعراف · 156" },
-        { text: "وَاصْبِرْ وَمَا صَبْرُكَ إِلَّا بِاللَّهِ", ref: "النحل · 127" },
-        { text: "إِنْ يَنْصُرْكُمُ اللَّهُ فَلَا غَالِبَ لَكُمْ", ref: "آل عمران · 160" },
-        { text: "وَتَوَكَّلْ عَلَى الْحَيِّ الَّذِي لَا يَمُوتُ", ref: "الفرقان · 58" },
-        { text: "فَسَيَكْفِيكَهُمُ اللَّهُ ۚ وَهُوَ السَّمِيعُ الْعَلِيمُ", ref: "البقرة · 137" },
-        { text: "وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ", ref: "الحديد · 4" },
-        { text: "إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ", ref: "الزمر · 10" },
-        { text: "سَيَجْعَلُ اللَّهُ بَعْدَ عُسْرٍ يُسْرًا", ref: "الطلاق · 7" },
-        { text: "وَأُفَوِّضُ أَمْرِي إِلَى اللَّهِ ۚ إِنَّ اللَّهَ بَصِيرٌ بِالْعِبَادِ", ref: "غافر · 44" },
-        { text: "الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", ref: "الرعد · 28" },
-        { text: "قُل لَّن يُصِيبَنَا إِلَّا مَا كَتَبَ اللَّهُ لَنَا هُوَ مَوْلَانَا", ref: "التوبة · 51" },
-        { text: "وَمَا بِكُم مِّن نِّعْمَةٍ فَمِنَ اللَّهِ", ref: "النحل · 53" },
-        { text: "عَسَىٰ رَبُّكُمْ أَن يَرْحَمَكُمْ", ref: "الإسراء · 8" },
-        { text: "إِنَّ رَبِّي قَرِيبٌ مُّجِيبٌ", ref: "هود · 61" },
-        { text: "نَبِّئْ عِبَادِي أَنِّي أَنَا الْغَفُورُ الرَّحِيمُ", ref: "الحجر · 49" },
-        { text: "يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ", ref: "البقرة · 153" },
-        { text: "وَاللَّهُ يَعْلَمُ وَأَنتُمْ لَا تَعْلَمُونَ", ref: "البقرة · 216" },
-        { text: "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَكُن مِّنَ السَّاجِدِينَ", ref: "الحجر · 98" }
-    ];
+        const startBtn = document.getElementById('start-btn');
+        const statusMsg = document.getElementById('status-message');
+        const compassUI = document.getElementById('compass-ui');
+        const compassDial = document.getElementById('compass-dial');
+        const qiblaArrow = document.getElementById('qibla-arrow');
+        const compassWrapper = document.getElementById('compass-wrapper');
 
-    let currentVerse = versesLibrary[6];
-
-    function updateVerseUI() {
-        const ayahTextDiv = document.getElementById('ayahText');
-        const ayahRefDiv = document.getElementById('ayahRef');
-        if (ayahTextDiv && ayahRefDiv) {
-            ayahTextDiv.innerHTML = `"${currentVerse.text}"`;
-            ayahRefDiv.innerHTML = currentVerse.ref;
+        // حساب الزاوية الهندسية للقبلة بناءً على موقع الموبايل
+        function calculateQibla(lat, lng) {
+            const PI = Math.PI;
+            const latK = MECCA_LAT * PI / 180.0;
+            const lngK = MECCA_LNG * PI / 180.0;
+            const phi = lat * PI / 180.0;
+            const lambda = lng * PI / 180.0;
+            
+            const y = Math.sin(lngK - lambda);
+            const x = Math.cos(phi) * Math.tan(latK) - Math.sin(phi) * Math.cos(lngK - lambda);
+            
+            let qibla = Math.atan2(y, x) * 180.0 / PI;
+            return (qibla + 360) % 360; 
         }
-    }
 
-// ----------------------------- 1. تهيئة الآية (بدون تخزين) ---------------------------------
-    function initVerse() {
-        // حساب عدد الأيام المنقضية منذ تاريخ قياسي ثابت
-        const daysSinceEpoch = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
-        
-        // استخدام باقي القسمة يضمن المرور بالترتيب من 0 إلى 29 بدون تكرار، ثم الإعادة التلقائية
-        const dailyIndex = daysSinceEpoch % versesLibrary.length;
-        
-        currentVerse = versesLibrary[dailyIndex];
-        updateVerseUI();
-    }
+        // بدء التشغيل
+        startBtn.addEventListener('click', () => {
+            statusMsg.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري تحديد الموقع...';
+            startBtn.style.display = 'none';
 
+            // 1. طلب الموقع (GPS)
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        userLat = position.coords.latitude;
+                        userLng = position.coords.longitude;
+                        qiblaAngle = calculateQibla(userLat, userLng);
+                        
+                        statusMsg.innerHTML = '<i class="fas fa-sync"></i> لُف الموبايل على شكل رقم 8 لمعايرة البوصلة';
+                        statusMsg.classList.remove('success');
+                        compassUI.style.display = 'block';
+                        
+                        // 2. طلب تفعيل البوصلة
+                        initCompass();
+                    },
+                    (error) => {
+                        statusMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> يرجى تفعيل الـ GPS (الموقع)';
+                        startBtn.style.display = 'flex';
+                    },
+                    { enableHighAccuracy: true }
+                );
+            } else {
+                statusMsg.innerHTML = "متصفحك لا يدعم تحديد الموقع";
+            }
+        });
 
-    // ----------------------------- 2. التواريخ محلياً (بدون API لتجنب الأخطاء) ----------------
-    function initDates() {
-        const today = new Date();
-        const gregorianOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-        const hijriOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-
-        // جلب التاريخ الميلادي والهجري عبر نظام المتصفح المدمج
-        const gregorianDate = new Intl.DateTimeFormat('ar-EG', gregorianOptions).format(today);
-        const hijriDate = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', hijriOptions).format(today);
-
-        document.getElementById('gregorianDateSpan').innerHTML = `<i class="fa-regular fa-calendar-alt"></i> ${gregorianDate}`;
-        document.getElementById('hijriDateSpan').innerHTML = `<i class="fas fa-moon"></i> ${hijriDate}`;
-    }
-
-    // ----------------------------- 3. إعدادات التنقل الثابت ---------------------------------
-    function setupBottomNav() {
-        const homeBtn = document.getElementById('homeNavBtn');
-        const quranBtn = document.getElementById('quranNavBtn');
-        const prayerBtn = document.getElementById('prayerNavBtn');
-        const radioBtn = document.getElementById('radioNavBtn');
-
-        if (homeBtn) {
-            homeBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                setActiveNav('home');
-            });
+        function initCompass() {
+            // طلب إذن البوصلة لأنظمة الآيفون (iOS 13+)
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientation);
+                        } else {
+                            statusMsg.innerHTML = "تم رفض صلاحية البوصلة";
+                        }
+                    })
+                    .catch(console.error);
+            } else {
+                // أنظمة الأندرويد
+                window.addEventListener('deviceorientationabsolute', handleOrientation);
+                // احتياطياً للمتصفحات الأخرى
+                window.addEventListener('deviceorientation', handleOrientation);
+            }
         }
-        if (quranBtn) quranBtn.addEventListener('click', () => setActiveNav('quran'));
-        if (prayerBtn) prayerBtn.addEventListener('click', () => setActiveNav('prayer'));
-        if (radioBtn) radioBtn.addEventListener('click', () => setActiveNav('radio'));
 
-        setActiveNav('home');
-    }
+        let lastVibrateTime = 0;
 
-    function setActiveNav(page) {
-        const btns = document.querySelectorAll('.nav-item-bottom');
-        btns.forEach(btn => btn.classList.remove('active'));
-        if (page === 'home') document.getElementById('homeNavBtn')?.classList.add('active');
-        if (page === 'quran') document.getElementById('quranNavBtn')?.classList.add('active');
-        if (page === 'prayer') document.getElementById('prayerNavBtn')?.classList.add('active');
-        if (page === 'radio') document.getElementById('radioNavBtn')?.classList.add('active');
-    }
+        function handleOrientation(event) {
+            let compassHeading = null;
 
-    // ----------------------------- 4. تهيئة وبدء التطبيق ---------------------------------
-    function startApp() {
-        initVerse();
-        initDates();
-        setupBottomNav();
-        
-        // إخفاء اللودر وإظهار المحتوى الرئيسي
-        document.getElementById('loader-overlay').style.display = 'none';
-        document.getElementById('mainContainer').style.display = 'block';
+            // استخراج الشمال الحقيقي بناءً على نظام التشغيل
+            if (event.webkitCompassHeading) {
+                compassHeading = event.webkitCompassHeading; // iOS
+            } else if (event.absolute && event.alpha !== null) {
+                compassHeading = 360 - event.alpha; // Android (Absolute)
+            } else if (event.alpha !== null) {
+                compassHeading = 360 - event.alpha; // Android (Fallback)
+            }
 
-    }
+            if (compassHeading !== null) {
+                // تدوير القرص ليبقى الشمال ثابتاً
+                compassDial.style.transform = `rotate(${-compassHeading}deg)`;
+                
+                // تدوير سهم الكعبة ليتجه للقبلة بدقة
+                let arrowRotation = qiblaAngle - compassHeading;
+                qiblaArrow.style.transform = `rotate(${arrowRotation}deg)`;
 
-    window.addEventListener('load', startApp);
-</script>
+                // التحقق مما إذا كان المستخدم يواجه القبلة (هامش خطأ 4 درجات فقط!)
+                let facingDiff = Math.abs(arrowRotation % 360);
+                if (facingDiff > 180) facingDiff = 360 - facingDiff;
+
+                if (facingDiff < 4) {
+                    statusMsg.innerHTML = '<i class="fas fa-check-circle"></i> أنت الآن تتجه للقبلة!';
+                    statusMsg.classList.add('success');
+                    compassWrapper.classList.add('correct');
+                    
+                    // اهتزاز تكتيكي لتأكيد الاتجاه (كل 3 ثواني عشان ميزعجش المستخدم)
+                    const now = Date.now();
+                    if (navigator.vibrate && (now - lastVibrateTime > 3000)) {
+                        navigator.vibrate([100, 50, 100]); // نبضتين كدليل على النجاح
+                        lastVibrateTime = now;
+                    }
+                } else {
+                    statusMsg.innerHTML = '<i class="fas fa-compass"></i> لُف الموبايل لحد ما الكعبة تنور';
+                    statusMsg.classList.remove('success');
+                    compassWrapper.classList.remove('correct');
+                }
+            }
+        }
+    </script>
 </body>
 </html>
