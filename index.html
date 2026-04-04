@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>رفيق المسلم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Amiri+Quran&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+    /* منع تحديد (تظليل) النصوص في جميع المتصفحات */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    /* منع ظهور المربع الرمادي/الأزرق عند الضغط على الأزرار والروابط في الهواتف */
+    -webkit-tap-highlight-color: transparent;
+    
+    /* منع التكبير بالنقر المزدوج السريع */
+    touch-action: manipulation;
+}
+
+input, textarea {
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+}
+
+body {
+            font-family: 'Cairo', sans-serif;
+            background: #F4F6F5; /* لون خلفية مريح جداً للعين */
+            min-height: 100vh;
+            color: #2C3E35; /* أخضر رمادي داكن هادئ */
+            position: relative;
+            overflow-x: hidden;
+            padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important; 
+        }
+
+        /* خلفية مزخرفة أنيقة جداً وشفافة */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" opacity="0.02"><path fill="none" stroke="%232C3E35" stroke-width="1" d="M400 50 L450 150 L550 150 L475 225 L500 325 L400 275 L300 325 L325 225 L250 150 L350 150 Z M400 50 L400 275 M475 225 L325 225 M500 325 L300 325 M450 150 L350 150"/><circle cx="400" cy="400" r="80" stroke="%232C3E35" fill="none"/><circle cx="400" cy="400" r="120" stroke="%232C3E35" fill="none" stroke-dasharray="5 5"/></svg>');
+            background-repeat: repeat;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ظلال ضوئية عصرية وأنعم بكثير */
+        .bg-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: rgba(44, 62, 53, 0.08); /* لون أهدى */
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            bottom: -50px;
+            left: -100px;
+            animation: floatGlow 12s infinite alternate ease-in-out;
+        }
+        .bg-glow.right {
+            top: -100px;
+            right: -100px;
+            left: auto;
+            bottom: auto;
+            background: rgba(184, 155, 94, 0.06); /* ذهبي مطفي جداً */
+            animation-delay: -6s;
+        }
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+            100% { transform: translate(20px, 40px) scale(1.1); opacity: 1; }
+        }
+
+        .container {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 50px 20px 30px;
+            position: relative;
+            z-index: 5;
+            animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:last-child {
+            margin-bottom: 0;
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* بطاقات زجاجية باحترافية عالية */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 40px -10px rgba(44, 62, 53, 0.06);
+            padding: 40px 24px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* رأس الصفحة */
+        .welcome-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .greeting h2 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #1A2B22; /* لون داكن وأكثر تركيزاً */
+            letter-spacing: -0.5px;
+        }
+        .greeting p {
+            font-size: 0.85rem;
+            color: rgba(44, 62, 53, 0.6);
+            font-weight: 500;
+        }
+        .logo-icon {
+            background: #FFFFFF;
+            width: 54px;
+            height: 54px;
+            border-radius: 20px; /* شكل عصري أكثر من الدائرة الكاملة */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #2C3E35;
+            border: 1px solid rgba(44, 62, 53, 0.08);
+            box-shadow: 0 8px 20px rgba(44, 62, 53, 0.05);
+        }
+
+        /* تاريـخ مزدوج */
+        .date-luxury {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        .date-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            background: #FFFFFF;
+            padding: 8px 16px;
+            border-radius: 14px;
+            color: #4A5D53;
+            box-shadow: 0 4px 12px rgba(44, 62, 53, 0.03);
+            flex: 1;
+            justify-content: center;
+        }
+        .date-item i {
+            font-size: 0.9rem;
+            color: #B89B5E; /* ذهبي هادئ */
+        }
+
+        /* آية اليوم */
+        .verse-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,249,0.7) 100%);
+            border-right: 4px solid #B89B5E;
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #1A2B22;
+            border-right: 3px solid #B89B5E;
+            padding-right: 12px;
+            opacity: 0.9;
+        }
+        .verse-text {
+            font-family: 'Amiri Quran', 'Amiri', serif;
+            font-size: 1.5rem;
+            line-height: 1.8;
+            text-align: center;
+            margin: 16px 0;
+            color: #1A2B22;
+            font-weight: 400;
+            word-spacing: 2px;
+        }
+        .verse-ref {
+            text-align: left;
+            font-size: 0.8rem;
+            color: #B89B5E;
+            font-weight: 700;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+
+        /* --- بطاقة الصلاة على النبي --- */
+        .salawat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(244,246,245,0.7) 100%);
+            border-right: 4px solid #5C7768;
+        }
+        .salawat-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1A2B22;
+            border-right: 3px solid #5C7768;
+            padding-right: 12px;
+            opacity: 0.9;
+        }
+        .salawat-text {
+            font-family: 'Amiri Quran', 'Amiri', serif;
+            font-size: 1.35rem;
+            line-height: 1.9;
+            text-align: center;
+            margin: 16px 0 10px;
+            color: #2C3E35;
+            font-weight: 500;
+        }
+
+.bottom-nav-fixed {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0;
+    right: 0;
+    width: 100%;
+    
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px); 
+    border-top: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 -10px 40px rgba(44, 62, 53, 0.04);
+    
+    z-index: 99999 !important; 
+    
+    padding: 8px 16px env(safe-area-inset-bottom, 6px) !important;
+    
+    transform: translate3d(0, 0, 0) !important; 
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    will-change: transform; 
+    contain: layout; 
+}
+
+        .nav-inner {
+            max-width: 520px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around; /* توزيع أفضل */
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* عناصر التنقل */
+        .nav-item-bottom {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #8C9E95; /* لون باهت للعناصر غير النشطة */
+            background: transparent;
+            border-radius: 20px;
+            padding: 6px 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            border: none;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .nav-item-bottom i {
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
+
+        .nav-item-bottom span {
+            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: -0.2px;
+            opacity: 0.9;
+        }
+
+        .nav-item-bottom:hover {
+            color: #4A5D53;
+        }
+
+        .nav-item-bottom:active {
+            transform: scale(0.92);
+        }
+
+        .nav-item-bottom.active {
+            color: #2C3E35;
+        }
+        .nav-item-bottom.active i {
+            color: #B89B5E;
+            transform: translateY(-2px);
+        }
+        .nav-item-bottom.active span {
+            color: #1A2B22;
+            font-weight: 700;
+        }
+
+        /* لودر راقي جداً */
+        #loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #F4F6F5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            flex-direction: column;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .loader-spinner {
+            width: 44px;
+            height: 44px;
+            border: 3px solid rgba(184, 155, 94, 0.15);
+            border-top: 3px solid #B89B5E;
+            border-radius: 50%;
+            animation: spin 0.8s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 480px) {
+            .container { padding: 45px 16px 20px; }
+            .verse-text { font-size: 1.35rem; }
+            .salawat-text { font-size: 1.25rem; }
+            .nav-item-bottom i { font-size: 1.25rem; }
+            .nav-item-bottom span { font-size: 0.65rem; }
+            .glass-card { padding: 30px 20px; border-radius: 24px; }
+.bottom-nav-fixed {
+    padding: 8px 10px env(safe-area-inset-bottom, 6px) !important;
+}
+        }
+    </style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="bg-glow right"></div>
+
+<div id="loader-overlay">
+    <div class="loader-spinner"></div>
+    <div style="color:#2C3E35; font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px;">رفيق المسلم</div>
+</div>
+
+<div class="container" id="mainContainer" style="display: none;">
+    <div class="glass-card" style="padding-bottom: 20px;">
+        <div class="welcome-header">
+<div class="greeting" style="display: flex; align-items: center; gap: 15px;">
+    <h2>رفيق المسلم</h2>
+    <a href="contact.html" style="color: #B89B5E; font-size: 1.2rem; text-decoration: none;">
+        <i class="far fa-question-circle"></i>
+    </a>
+</div>
+            <div class="logo-icon">
+                <i class="fas fa-mosque"></i>
+            </div>
+        </div>
+        <div class="date-luxury">
+            <div class="date-item" id="hijriDateSpan"><i class="fas fa-moon"></i> جاري التحميل...</div>
+            <div class="date-item" id="gregorianDateSpan"><i class="fa-regular fa-calendar-alt"></i> ...</div>
+        </div>
+    </div>
+
+    <div class="glass-card verse-card">
+        <div class="section-title">
+            <span>آية اليوم</span>
+        </div>
+        <div class="verse-text" id="ayahText">
+            "فَقَالُوا عَلَى اللَّهِ تَوَكَّلْنَا رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِلْقَوْمِ الظَّالِمِينَ"
+        </div>
+        <div class="verse-ref" id="ayahRef">سورة يونس · 85</div>
+    </div>
+    
+    <div class="glass-card salawat-card">
+        <div class="salawat-title">
+            <span>عطّر فمك</span>
+        </div>
+        <div class="salawat-text">
+            اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ عَدَدَ مَا ذَكَرَهُ الذَّاكِرُونَ، وَغَفَلَ عَنْ ذِكْرِهِ الْغَافِلُونَ
+        </div>
+    </div>
+
+</div>
+
+<div class="bottom-nav-fixed" id="bottomNavBar">
+    <div class="nav-inner">
+        <a href="#" class="nav-item-bottom" id="homeNavBtn">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="quran.html" class="nav-item-bottom" id="quranNavBtn">
+            <i class="fas fa-book-open"></i>
+            <span>المصحف</span>
+        </a>
+        <a href="prayer.html" class="nav-item-bottom" id="prayerNavBtn">
+            <i class="fas fa-mosque"></i>
+            <span>مواقيت</span>
+        </a>
+        <a href="radio.html" class="nav-item-bottom" id="radioNavBtn">
+            <i class="fas fa-radio"></i>
+            <span>الراديو</span>
+        </a>
+    </div>
+</div>
+
+<script>
+// ----------------------------- 1. مكتبة الآيات المتنوعة (30 يوم) ---------------------------------
+    const versesLibrary = [
+        { text: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", ref: "البقرة · 201" },
+        { text: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", ref: "البقرة · 153" },
+        { text: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ", ref: "الطلاق · 2-3" },
+        { text: "فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ", ref: "البقرة · 152" },
+        { text: "قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَىٰ أَنفُسِهِمْ لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ", ref: "الزمر · 53" },
+        { text: "وَأَن لَّيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ", ref: "النجم · 39" },
+        { text: "فَقَالُوا عَلَى اللَّهِ تَوَكَّلْنَا رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِلْقَوْمِ الظَّالِمِينَ", ref: "يونس · 85" },
+        { text: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً", ref: "آل عمران · 8" },
+        { text: "وَاللَّهُ غَالِبٌ عَلَىٰ أَمْرِهِ وَلَٰكِنَّ أَكْثَرَ النَّاسِ لَا يَعْلَمُونَ", ref: "يوسف · 21" },
+        { text: "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا", ref: "البقرة · 286" },
+        { text: "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا * إِنَّ مَعَ الْعُسْرِ يُسْرًا", ref: "الشرح · 5-6" },
+        { text: "وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ", ref: "غافر · 60" },
+        { text: "وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ", ref: "الأعراف · 156" },
+        { text: "وَاصْبِرْ وَمَا صَبْرُكَ إِلَّا بِاللَّهِ", ref: "النحل · 127" },
+        { text: "إِنْ يَنْصُرْكُمُ اللَّهُ فَلَا غَالِبَ لَكُمْ", ref: "آل عمران · 160" },
+        { text: "وَتَوَكَّلْ عَلَى الْحَيِّ الَّذِي لَا يَمُوتُ", ref: "الفرقان · 58" },
+        { text: "فَسَيَكْفِيكَهُمُ اللَّهُ ۚ وَهُوَ السَّمِيعُ الْعَلِيمُ", ref: "البقرة · 137" },
+        { text: "وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ", ref: "الحديد · 4" },
+        { text: "إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ", ref: "الزمر · 10" },
+        { text: "سَيَجْعَلُ اللَّهُ بَعْدَ عُسْرٍ يُسْرًا", ref: "الطلاق · 7" },
+        { text: "وَأُفَوِّضُ أَمْرِي إِلَى اللَّهِ ۚ إِنَّ اللَّهَ بَصِيرٌ بِالْعِبَادِ", ref: "غافر · 44" },
+        { text: "الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", ref: "الرعد · 28" },
+        { text: "قُل لَّن يُصِيبَنَا إِلَّا مَا كَتَبَ اللَّهُ لَنَا هُوَ مَوْلَانَا", ref: "التوبة · 51" },
+        { text: "وَمَا بِكُم مِّن نِّعْمَةٍ فَمِنَ اللَّهِ", ref: "النحل · 53" },
+        { text: "عَسَىٰ رَبُّكُمْ أَن يَرْحَمَكُمْ", ref: "الإسراء · 8" },
+        { text: "إِنَّ رَبِّي قَرِيبٌ مُّجِيبٌ", ref: "هود · 61" },
+        { text: "نَبِّئْ عِبَادِي أَنِّي أَنَا الْغَفُورُ الرَّحِيمُ", ref: "الحجر · 49" },
+        { text: "يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ", ref: "البقرة · 153" },
+        { text: "وَاللَّهُ يَعْلَمُ وَأَنتُمْ لَا تَعْلَمُونَ", ref: "البقرة · 216" },
+        { text: "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَكُن مِّنَ السَّاجِدِينَ", ref: "الحجر · 98" }
+    ];
+
+    let currentVerse = versesLibrary[6];
+
+    function updateVerseUI() {
+        const ayahTextDiv = document.getElementById('ayahText');
+        const ayahRefDiv = document.getElementById('ayahRef');
+        if (ayahTextDiv && ayahRefDiv) {
+            ayahTextDiv.innerHTML = `"${currentVerse.text}"`;
+            ayahRefDiv.innerHTML = currentVerse.ref;
+        }
+    }
+
+// ----------------------------- 1. تهيئة الآية (بدون تخزين) ---------------------------------
+    function initVerse() {
+        // حساب عدد الأيام المنقضية منذ تاريخ قياسي ثابت
+        const daysSinceEpoch = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
+        
+        // استخدام باقي القسمة يضمن المرور بالترتيب من 0 إلى 29 بدون تكرار، ثم الإعادة التلقائية
+        const dailyIndex = daysSinceEpoch % versesLibrary.length;
+        
+        currentVerse = versesLibrary[dailyIndex];
+        updateVerseUI();
+    }
+
+
+    // ----------------------------- 2. التواريخ محلياً (بدون API لتجنب الأخطاء) ----------------
+    function initDates() {
+        const today = new Date();
+        const gregorianOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+        const hijriOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+
+        // جلب التاريخ الميلادي والهجري عبر نظام المتصفح المدمج
+        const gregorianDate = new Intl.DateTimeFormat('ar-EG', gregorianOptions).format(today);
+        const hijriDate = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', hijriOptions).format(today);
+
+        document.getElementById('gregorianDateSpan').innerHTML = `<i class="fa-regular fa-calendar-alt"></i> ${gregorianDate}`;
+        document.getElementById('hijriDateSpan').innerHTML = `<i class="fas fa-moon"></i> ${hijriDate}`;
+    }
+
+    // ----------------------------- 3. إعدادات التنقل الثابت ---------------------------------
+    function setupBottomNav() {
+        const homeBtn = document.getElementById('homeNavBtn');
+        const quranBtn = document.getElementById('quranNavBtn');
+        const prayerBtn = document.getElementById('prayerNavBtn');
+        const radioBtn = document.getElementById('radioNavBtn');
+
+        if (homeBtn) {
+            homeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setActiveNav('home');
+            });
+        }
+        if (quranBtn) quranBtn.addEventListener('click', () => setActiveNav('quran'));
+        if (prayerBtn) prayerBtn.addEventListener('click', () => setActiveNav('prayer'));
+        if (radioBtn) radioBtn.addEventListener('click', () => setActiveNav('radio'));
+
+        setActiveNav('home');
+    }
+
+    function setActiveNav(page) {
+        const btns = document.querySelectorAll('.nav-item-bottom');
+        btns.forEach(btn => btn.classList.remove('active'));
+        if (page === 'home') document.getElementById('homeNavBtn')?.classList.add('active');
+        if (page === 'quran') document.getElementById('quranNavBtn')?.classList.add('active');
+        if (page === 'prayer') document.getElementById('prayerNavBtn')?.classList.add('active');
+        if (page === 'radio') document.getElementById('radioNavBtn')?.classList.add('active');
+    }
+
+    // ----------------------------- 4. تهيئة وبدء التطبيق ---------------------------------
+    function startApp() {
+        initVerse();
+        initDates();
+        setupBottomNav();
+        
+        // إخفاء اللودر وإظهار المحتوى الرئيسي
+        document.getElementById('loader-overlay').style.display = 'none';
+        document.getElementById('mainContainer').style.display = 'block';
+
+    }
+
+    window.addEventListener('load', startApp);
+</script>
+</body>
+</html>
