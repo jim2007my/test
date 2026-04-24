@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الرفيق | منصة التأهيل المهني المتقدم</title>
+    <title>الرفيق المسلم | منصة التأهيل المهني المتقدم</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -40,7 +40,7 @@
     <nav class="fixed w-full z-50 top-0 bg-white/80 dark:bg-[#0b1120]/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 h-16 lg:h-20 flex items-center">
         <div class="max-w-7xl mx-auto px-4 lg:px-8 w-full flex justify-between items-center">
             <div class="flex items-center gap-3 cursor-pointer">
-                <span class="font-bold text-xl lg:text-2xl text-primary tracking-tight">الرفيق</span>
+                <span class="font-bold text-xl lg:text-2xl text-primary tracking-tight">الرفيق المسلم</span>
             </div>
 
             <div class="hidden md:flex items-center gap-6">
@@ -88,39 +88,106 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col group shadow-sm hover:shadow-xl">
                     <div class="h-56 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=600&q=80" alt="React Development" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                            <span class="text-white font-medium">تطوير واجهات المستخدم</span>
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Web Design" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 right-4 bg-white/90 dark:bg-black/70 backdrop-blur-sm text-slate-900 dark:text-white text-xs font-bold px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700">
+                            مستوى تأسيسي
                         </div>
                     </div>
-                    <div class="p-8">
-                        <h3 class="font-bold text-2xl text-slate-900 dark:text-white mb-4">هندسة الويب الحديثة (React)</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-8">إتقان بناء الأنظمة السحابية المتقدمة، إدارة الحالة الموزعة، وهندسة المكونات القابلة لإعادة الاستخدام.</p>
+                    
+                    <div class="p-8 flex flex-col flex-grow">
+                        <h3 class="font-bold text-2xl text-slate-900 dark:text-white mb-3">تصميم مواقع الويب</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 text-sm">
+                            خطوتك الأولى لدخول عالم تطوير الويب. تعلم كيفية بناء وتنسيق صفحات ويب جذابة ومتجاوبة من الصفر.
+                        </p>
+                        
+                        <div class="mb-8">
+                            <button onclick="toggleAccordion(this)" class="flex items-center gap-2 group focus:outline-none w-max">
+                                <span class="font-bold text-primary dark:text-blue-400 text-sm group-hover:underline underline-offset-4 transition-all">ما الذي ستتعلمه؟</span>
+                                <i class="fa-solid fa-chevron-down text-primary dark:text-blue-400 transition-transform duration-300 text-xs"></i>
+                            </button>
+                            <div class="hidden pt-4 text-sm text-slate-600 dark:text-slate-400 transition-all duration-300 ease-in-out">
+                                <ul class="space-y-3">
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-check text-green-500 mt-1 text-xs"></i>
+                                        <span>بناء واجهة موقع متكاملة وجميلة.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-check text-green-500 mt-1 text-xs"></i>
+                                        <span>فهم بنية مواقع الويب.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-check text-green-500 mt-1 text-xs"></i>
+                                        <span>تحويل صورة موقع إلى موقع حقيقي.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-check text-green-500 mt-1 text-xs"></i>
+                                        <span>تنسيق الموقع باحترافية باستخدام الـ CSS.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-check text-green-500 mt-1 text-xs"></i>
+                                        <span>بناء مشروع جميل يضاف للـ CV.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-check text-green-500 mt-1 text-xs"></i>
+                                        <span>مستعد للخطوة التالية في بناء مواقع تفاعلية ومتجاوبة مع أحجام الأجهزة.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         
                         <div class="flex items-center justify-between mt-auto">
                             <div class="flex items-center gap-2">
                                 <i class="fa-regular fa-clock text-primary"></i>
                                 <span class="text-sm font-bold text-slate-700 dark:text-slate-300">مكثف (3 أسابيع)</span>
                             </div>
-                            <button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-6 py-2 rounded-xl text-sm font-bold transition-all">
-                                عرض البرنامج
+                            <button class="bg-primary hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                                اشترك الآن
                             </button>
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
         </div>
     </section>
 
-    <footer class="border-t border-slate-200 dark:border-slate-800 py-12 bg-slate-50 dark:bg-[#0b1120]">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="flex items-center gap-2">
-                <span class="font-extrabold text-2xl text-primary">الرفيق</span>
+    <footer class="bg-white dark:bg-[#0b1120] border-t border-slate-200 dark:border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-right">
+                
+                <div class="flex flex-col items-center md:items-start">
+                    <span class="font-extrabold text-3xl text-primary tracking-tight mb-4">الرفيق المسلم</span>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-xs">
+                        منصتك الموثوقة لبدء رحلتك في عالم التكنولوجيا وتطوير مهاراتك بمعايير احترافية تناسب سوق العمل.
+                    </p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-start gap-3">
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-2">روابط سريعة</h4>
+                    <a href="#" class="text-slate-500 hover:text-primary dark:hover:text-primary transition-colors text-sm">عن المنصة</a>
+                    <a href="#" class="text-slate-500 hover:text-primary dark:hover:text-primary transition-colors text-sm">المسارات التعليمية</a>
+                    <a href="#" class="text-slate-500 hover:text-primary dark:hover:text-primary transition-colors text-sm">الأسئلة الشائعة</a>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-start gap-4">
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-2">تواصل معنا</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-primary hover:text-white hover:border-primary text-slate-500 dark:text-slate-400 flex items-center justify-center transition-all shadow-sm">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-primary hover:text-white hover:border-primary text-slate-500 dark:text-slate-400 flex items-center justify-center transition-all shadow-sm">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-primary hover:text-white hover:border-primary text-slate-500 dark:text-slate-400 flex items-center justify-center transition-all shadow-sm">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
             </div>
-            <p class="text-slate-500 text-sm">© 2026 جميع الحقوق محفوظة لـ الرفيق.</p>
-            <div class="flex gap-4">
-                <a href="#" class="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 hover:text-primary transition-all"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#" class="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 hover:text-primary transition-all"><i class="fa-brands fa-linkedin-in"></i></a>
+            
+            <div class="border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 dark:text-slate-400 text-sm">© 2026 جميع الحقوق محفوظة لـ <span class="font-bold text-slate-700 dark:text-slate-300">الرفيق المسلم</span>.</p>
+                <p class="text-slate-400 dark:text-slate-500 text-xs">صُنع بحب من أجل مستقبلك</p>
             </div>
         </div>
     </footer>
@@ -146,7 +213,6 @@
             }
         }
 
-        // Initial Check
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             setTheme(true);
         } else {
@@ -163,6 +229,20 @@
 
         btn.addEventListener('click', () => { menu.classList.remove('hidden'); menu.classList.add('flex'); });
         closeBtn.addEventListener('click', () => { menu.classList.add('hidden'); menu.classList.remove('flex'); });
+
+        // Accordion Logic (ما ستتعلمه)
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            content.classList.toggle('hidden');
+            
+            if (content.classList.contains('hidden')) {
+                icon.classList.remove('rotate-180');
+            } else {
+                icon.classList.add('rotate-180');
+            }
+        }
     </script>
 </body>
 </html>
