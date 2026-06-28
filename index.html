@@ -34,6 +34,7 @@
             background: var(--gold); border-radius: 50%;
             filter: blur(80px); top: -120px; right: -120px;
             opacity: 0.07; pointer-events: none; z-index: 0;
+            will-change: transform; /* تحسين الأداء */
             animation: floatBg1 15s ease-in-out infinite alternate;
         }
         .bg-glow-2 {
@@ -41,6 +42,7 @@
             background: #7c5cbf; border-radius: 50%;
             filter: blur(80px); bottom: -100px; left: -100px;
             opacity: 0.05; pointer-events: none; z-index: 0;
+            will-change: transform; /* تحسين الأداء */
             animation: floatBg2 18s ease-in-out infinite alternate;
         }
         .bg-radial {
@@ -50,17 +52,18 @@
                 radial-gradient(ellipse at 80% 20%, rgba(120,80,200,0.04) 0%, transparent 50%);
         }
 
+        /* استخدام translate3d لفرض تشغيل الأنيميشن على كارت الشاشة ومنع التقطيع */
         @keyframes floatBg1 {
-            0%   { transform: translate(0,0) scale(1); }
-            100% { transform: translate(30px,-30px) scale(1.1); }
+            0%   { transform: translate3d(0,0,0) scale(1); }
+            100% { transform: translate3d(30px,-30px,0) scale(1.1); }
         }
         @keyframes floatBg2 {
-            0%   { transform: translate(0,0) scale(1); }
-            100% { transform: translate(-20px,20px) scale(1.08); }
+            0%   { transform: translate3d(0,0,0) scale(1); }
+            100% { transform: translate3d(-20px,20px,0) scale(1.08); }
         }
         @keyframes floatPrize {
-            0%,100% { transform: translateY(0); }
-            50%      { transform: translateY(-12px); }
+            0%,100% { transform: translate3d(0,0,0); }
+            50%      { transform: translate3d(0,-12px,0); }
         }
         @keyframes shimmer {
             0%,100% { opacity: 1; }
@@ -103,6 +106,7 @@
         .prize-img {
             width: 100%; display: block;
             border-radius: 15%;
+            will-change: transform; /* تحسين الأداء */
             animation: floatPrize 4s ease-in-out infinite;
             filter: drop-shadow(0 18px 28px rgba(0,0,0,0.5));
         }
@@ -117,6 +121,7 @@
         .main-title {
             font-size: clamp(26px,5vw,38px); font-weight: 900;
             color: #fff; margin-bottom: 8px;
+            will-change: opacity; /* تحسين الأداء */
             animation: shimmer 3s ease-in-out infinite;
         }
         .sub-title {
@@ -237,6 +242,7 @@
             padding: 32px; box-shadow: 0 24px 48px rgba(0,0,0,0.7);
             max-height: 90vh; overflow-y: auto;
             transform: translateY(20px); transition: transform 0.3s ease;
+            will-change: transform; /* تحسين الأداء */
         }
         .modal-overlay.open .modal-content { transform: translateY(0); }
 
@@ -302,7 +308,6 @@
 
         .file-name { margin-top: 8px; font-size: 13px; color: var(--gold); font-weight: 600; display: none; }
 
-        /* تنسيق محتوى نافذة كيفية المشاركة الجديد */
         .how-to-text {
             text-align: right;
             color: var(--text-secondary);
@@ -381,16 +386,6 @@
             </div>
         </div>
 
-        <!--<div class="progress-wrap">
-            <div class="progress-labels">
-                <span>نسبة الامتلاء</span>
-                <span>44%</span>
-            </div>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" style="width:43.5%"></div>
-            </div>
-        </div>-->
-
         <div class="price-badge">
             <span>رسوم المشاركة</span>
             <strong>25.00 EGP</strong>
@@ -404,7 +399,6 @@
     </div>
 </div>
 
-<!-- نافذة الدفع -->
 <div class="modal-overlay" id="paymentModal">
     <div class="modal-content">
         <div class="modal-header">
@@ -447,7 +441,6 @@
     </div>
 </div>
 
-<!-- النافذة المنبثقة لـ كيفية المشاركة (بعد التعديل) -->
 <div class="modal-overlay" id="howToModal">
     <div class="modal-content">
         <div class="modal-header">
@@ -465,20 +458,26 @@
 
 <script>
     const END_DATE = new Date("2026-07-15T23:59:59").getTime();
+    
+    // تحسين الأداء بتخزين العناصر في متغيرات بدلاً من البحث عنها كل ثانية
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
     function pad(n){ return String(n).padStart(2,"0"); }
     function tick(){
         const diff = Math.max(0, END_DATE - Date.now());
-        document.getElementById("days").textContent    = pad(Math.floor(diff/(1000*60*60*24)));
-        document.getElementById("hours").textContent   = pad(Math.floor((diff/(1000*60*60))%24));
-        document.getElementById("minutes").textContent = pad(Math.floor((diff/(1000*60))%60));
-        document.getElementById("seconds").textContent = pad(Math.floor((diff/1000)%60));
+        daysEl.textContent    = pad(Math.floor(diff/(1000*60*60*24)));
+        hoursEl.textContent   = pad(Math.floor((diff/(1000*60*60))%24));
+        minutesEl.textContent = pad(Math.floor((diff/(1000*60))%60));
+        secondsEl.textContent = pad(Math.floor((diff/1000)%60));
     }
     tick(); setInterval(tick, 1000);
 
     const paymentModal = document.getElementById("paymentModal");
     const howToModal = document.getElementById("howToModal");
 
-    // وظائف نافذة الدفع
     function openModal(){
         paymentModal.classList.add("open");
         document.body.style.overflow = "hidden";
@@ -494,7 +493,6 @@
         document.body.style.overflow = "";
     }
 
-    // وظائف نافذة كيفية المشاركة
     function openHowToModal() {
         howToModal.classList.add("open");
         document.body.style.overflow = "hidden";
@@ -504,11 +502,9 @@
         document.body.style.overflow = "";
     }
 
-    // إغلاق النوافذ عند الضغط في الخارج
     paymentModal.addEventListener("click", e => { if(e.target === paymentModal) closeModal(); });
     howToModal.addEventListener("click", e => { if(e.target === howToModal) closeHowToModal(); });
 
-    // إغلاق النوافذ عند الضغط على زر Escape
     document.addEventListener("keydown", e => { 
         if(e.key === "Escape") {
             closeModal(); 
@@ -533,7 +529,6 @@
         updateSubmit();
     }
 
-    // التعديل الذي طلبته: إرسال البيانات لتيليجرام وتوجيه المستخدم للواتس آب
     async function handleSubmit(){
         const submitBtn = document.getElementById("submitBtn");
         submitBtn.disabled = true;
@@ -543,9 +538,7 @@
         const fileInput = document.getElementById("mScreenshot");
         const file = fileInput.files[0];
 
-        // ⚠️ هام: ضع التوكن الخاص بالبوت الخاص بك هنا
         const botToken = "YOUR_BOT_TOKEN_HERE"; 
-        // ⚠️ هام: ضع معرف المحادثة الخاص بك (Chat ID) هنا
         const chatId = "YOUR_CHAT_ID_HERE"; 
 
         const formData = new FormData();
@@ -560,7 +553,6 @@
             });
 
             if(response.ok) {
-                // توجيه المستخدم لرسالة الواتس آب الخاصة بك مباشرة
                 window.location.href = "https://wa.me/201157590408";
             } else {
                 alert("حدث خطأ يرجى المحاولة مرة أخرى.");
