@@ -450,6 +450,7 @@
         <div class="how-to-text">
             <p><strong>الكسيب.. الكل كسبان!</strong> بنعمل مسابقات على جوايز قيمة كل يوم، والكسبان بيكون واحد بس من المشتركين.</p>
             <p>عشان تشارك في المسابقة بتضغط على زر <strong>شارك الآن</strong>، بيظهرلك رقم هتحول عليه مبلغ الاشتراك، وفيه خانة بتكتب فيها الرقم اللي حولت منه، والخانة الأخيرة بتدوس عليها وتختار سكرين شوت التحويل وبعدها بتدوس <strong>تأكيد وإرسال</strong>.</p>
+            <p>بعد الضغط على تأكيد هيتم توجيهك للواتساب وهتلاقي فيه رسالة جاهزة مكتوبة بالكود الخاص بيك لازم تبعت الرسالة للشات ال ظهرلك عشان لو انت سعيد الحظ نقدر نتواصل معاك.</p>
         </div>
     </div>
 </div>
@@ -529,6 +530,16 @@
         updateSubmit();
     }
 
+    // دالة لتوليد كود عشوائي مكون من 4 حروف وأرقام إنجليزية كبيرة
+    function generateRandomCode() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let result = '';
+        for (let i = 0; i < 4; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
     async function handleSubmit(){
         const submitBtn = document.getElementById("submitBtn");
         submitBtn.disabled = true;
@@ -538,13 +549,18 @@
         const fileInput = document.getElementById("mScreenshot");
         const file = fileInput.files[0];
 
-        const botToken = "YOUR_BOT_TOKEN_HERE"; 
-        const chatId = "YOUR_CHAT_ID_HERE"; 
+        // توليد الكود العشوائي للاشتراك
+        const randomCode = generateRandomCode();
+
+        const botToken = "8694964776:AAG5h0Tc4Zd26odtllmHiWn8j6hhV7CZECI"; 
+        const chatId = "8836417260"; 
 
         const formData = new FormData();
         formData.append("chat_id", chatId);
         formData.append("photo", file);
-        formData.append("caption", "طلب اشتراك جديد\nرقم المحفظة المرسل منه: " + phone);
+        
+        // إضافة الكود العشوائي لرسالة التيليجرام
+        formData.append("caption", "طلب اشتراك جديد\nرقم المحفظة المرسل منه: " + phone + "\nكود الاشتراك: " + randomCode);
 
         try {
             const response = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
@@ -553,7 +569,9 @@
             });
 
             if(response.ok) {
-                window.location.href = "https://wa.me/201157590408";
+                // إضافة الكود العشوائي لرسالة الواتساب وتشفير النص لدعم الروابط بشكل صحيح
+                const whatsappMsg = encodeURIComponent("مرحباً، لقد قمت بتأكيد الاشتراك وهذا هو كود الاشتراك الخاص بي: " + randomCode);
+                window.location.href = "https://wa.me/201157590408?text=" + whatsappMsg;
             } else {
                 alert("حدث خطأ يرجى المحاولة مرة أخرى.");
                 submitBtn.disabled = false;
