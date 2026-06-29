@@ -34,7 +34,7 @@
             background: var(--gold); border-radius: 50%;
             filter: blur(80px); top: -120px; right: -120px;
             opacity: 0.07; pointer-events: none; z-index: 0;
-            will-change: transform; /* تحسين الأداء */
+            will-change: transform;
             animation: floatBg1 15s ease-in-out infinite alternate;
         }
         .bg-glow-2 {
@@ -42,7 +42,7 @@
             background: #7c5cbf; border-radius: 50%;
             filter: blur(80px); bottom: -100px; left: -100px;
             opacity: 0.05; pointer-events: none; z-index: 0;
-            will-change: transform; /* تحسين الأداء */
+            will-change: transform;
             animation: floatBg2 18s ease-in-out infinite alternate;
         }
         .bg-radial {
@@ -52,7 +52,6 @@
                 radial-gradient(ellipse at 80% 20%, rgba(120,80,200,0.04) 0%, transparent 50%);
         }
 
-        /* استخدام translate3d لفرض تشغيل الأنيميشن على كارت الشاشة ومنع التقطيع */
         @keyframes floatBg1 {
             0%   { transform: translate3d(0,0,0) scale(1); }
             100% { transform: translate3d(30px,-30px,0) scale(1.1); }
@@ -68,6 +67,9 @@
         @keyframes shimmer {
             0%,100% { opacity: 1; }
             50%      { opacity: 0.75; }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         .app {
@@ -106,7 +108,7 @@
         .prize-img {
             width: 100%; display: block;
             border-radius: 15%;
-            will-change: transform; /* تحسين الأداء */
+            will-change: transform;
             animation: floatPrize 4s ease-in-out infinite;
             filter: drop-shadow(0 18px 28px rgba(0,0,0,0.5));
         }
@@ -121,7 +123,7 @@
         .main-title {
             font-size: clamp(26px,5vw,38px); font-weight: 900;
             color: #fff; margin-bottom: 8px;
-            will-change: opacity; /* تحسين الأداء */
+            will-change: opacity;
             animation: shimmer 3s ease-in-out infinite;
         }
         .sub-title {
@@ -197,8 +199,10 @@
             cursor: pointer; margin-bottom: 12px;
             box-shadow: 0 6px 24px rgba(212,168,71,0.25);
             transition: transform 0.2s, box-shadow 0.2s;
+            display: flex; align-items: center; justify-content: center;
+            gap: 12px;
         }
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 10px 32px rgba(212,168,71,0.4);
         }
@@ -206,6 +210,21 @@
             background: rgba(255,255,255,0.08);
             color: rgba(255,255,255,0.3);
             cursor: not-allowed; transform: none; box-shadow: none;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(11,11,18,0.2);
+            border-radius: 50%;
+            border-top-color: #0b0b12;
+            animation: spin 0.7s linear infinite;
+            flex-shrink: 0;
+        }
+        .btn-primary:disabled .spinner {
+            border-color: rgba(255,255,255,0.15);
+            border-top-color: rgba(255,255,255,0.5);
         }
 
         .how-to-link {
@@ -242,7 +261,7 @@
             padding: 32px; box-shadow: 0 24px 48px rgba(0,0,0,0.7);
             max-height: 90vh; overflow-y: auto;
             transform: translateY(20px); transition: transform 0.3s ease;
-            will-change: transform; /* تحسين الأداء */
+            will-change: transform;
         }
         .modal-overlay.open .modal-content { transform: translateY(0); }
 
@@ -391,7 +410,7 @@
             <strong>25.00 EGP</strong>
         </div>
 
-        <button class="btn-primary" onclick="openModal()">شارك الآن – ادخل السحب</button>
+        <button class="btn-primary" id="mainSubmitBtn" onclick="openModal()">شارك الآن – ادخل السحب</button>
         
         <span class="how-to-link" onclick="openHowToModal()">تعرف على كيفية المشاركة</span>
 
@@ -436,7 +455,10 @@
                 <div class="file-name" id="fileName"></div>
             </div>
 
-            <button class="btn-primary" id="submitBtn" disabled onclick="handleSubmit()">تأكيد وإرسال</button>
+            <button class="btn-primary" id="submitBtn" disabled onclick="handleSubmit()">
+                <span id="submitText">تأكيد وإرسال</span>
+                <span class="spinner" id="submitSpinner" style="display:none;"></span>
+            </button>
         </div>
     </div>
 </div>
@@ -460,7 +482,6 @@
 <script>
     const END_DATE = new Date("2026-07-15T23:59:59").getTime();
     
-    // تحسين الأداء بتخزين العناصر في متغيرات بدلاً من البحث عنها كل ثانية
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minutesEl = document.getElementById("minutes");
@@ -487,11 +508,21 @@
         document.getElementById("mFromPhone").value = "";
         document.getElementById("mScreenshot").value = "";
         document.getElementById("fileName").style.display = "none";
-        document.getElementById("submitBtn").disabled = true;
+        const submitBtn = document.getElementById("submitBtn");
+        submitBtn.disabled = true;
+        document.getElementById("submitText").style.display = "inline";
+        document.getElementById("submitSpinner").style.display = "none";
+        submitBtn.innerHTML = `<span id="submitText">تأكيد وإرسال</span><span class="spinner" id="submitSpinner" style="display:none;"></span>`;
     }
     function closeModal(){
         paymentModal.classList.remove("open");
         document.body.style.overflow = "";
+        // إعادة الزر لحالته الطبيعية
+        const submitBtn = document.getElementById("submitBtn");
+        submitBtn.disabled = true;
+        document.getElementById("submitText").style.display = "inline";
+        document.getElementById("submitSpinner").style.display = "none";
+        submitBtn.innerHTML = `<span id="submitText">تأكيد وإرسال</span><span class="spinner" id="submitSpinner" style="display:none;"></span>`;
     }
 
     function openHowToModal() {
@@ -514,7 +545,10 @@
     });
 
     let phoneOk = false, fileOk = false;
-    function updateSubmit(){ document.getElementById("submitBtn").disabled = !(phoneOk && fileOk); }
+    function updateSubmit(){ 
+        const btn = document.getElementById("submitBtn");
+        btn.disabled = !(phoneOk && fileOk);
+    }
 
     function onPhoneInput(el){
         el.value = el.value.replace(/\D/g,"").slice(0,11);
@@ -530,7 +564,6 @@
         updateSubmit();
     }
 
-    // دالة لتوليد كود عشوائي مكون من 4 حروف وأرقام إنجليزية كبيرة
     function generateRandomCode() {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         let result = '';
@@ -542,14 +575,17 @@
 
     async function handleSubmit(){
         const submitBtn = document.getElementById("submitBtn");
+        const submitText = document.getElementById("submitText");
+        const submitSpinner = document.getElementById("submitSpinner");
+
+        // تعطيل الزر وإظهار الـ spinner
         submitBtn.disabled = true;
-        submitBtn.textContent = "جاري الإرسال...";
+        submitText.style.display = "none";
+        submitSpinner.style.display = "inline-block";
 
         const phone = document.getElementById("mFromPhone").value;
         const fileInput = document.getElementById("mScreenshot");
         const file = fileInput.files[0];
-
-        // توليد الكود العشوائي للاشتراك
         const randomCode = generateRandomCode();
 
         const botToken = "8694964776:AAG5h0Tc4Zd26odtllmHiWn8j6hhV7CZECI"; 
@@ -558,8 +594,6 @@
         const formData = new FormData();
         formData.append("chat_id", chatId);
         formData.append("photo", file);
-        
-        // إضافة الكود العشوائي لرسالة التيليجرام
         formData.append("caption", "طلب اشتراك جديد\nرقم المحفظة المرسل منه: " + phone + "\nكود الاشتراك: " + randomCode);
 
         try {
@@ -569,18 +603,22 @@
             });
 
             if(response.ok) {
-                // إضافة الكود العشوائي لرسالة الواتساب وتشفير النص لدعم الروابط بشكل صحيح
+                // فتح الواتساب مباشرة عبر التطبيق
                 const whatsappMsg = encodeURIComponent("مرحباً، لقد قمت بتأكيد الاشتراك وهذا هو كود الاشتراك الخاص بي: " + randomCode);
-                window.location.href = "https://wa.me/201157590408?text=" + whatsappMsg;
+                // استخدام protocol whatsapp:// لفتح التطبيق مباشرة
+                window.location.href = "whatsapp://send?phone=201157590408&text=" + whatsappMsg;
             } else {
                 alert("حدث خطأ يرجى المحاولة مرة أخرى.");
-                submitBtn.disabled = false;
-                submitBtn.textContent = "تأكيد وإرسال";
             }
         } catch (error) {
             alert("حدث خطأ يرجى التحقق من الإنترنت والمحاولة مجدداً.");
+        } finally {
+            // إعادة الزر لحالته (لكن بعد الانتقال للواتساب قد لا يظهر)
+            submitText.style.display = "inline";
+            submitSpinner.style.display = "none";
             submitBtn.disabled = false;
-            submitBtn.textContent = "تأكيد وإرسال";
+            // إغلاق المودال
+            closeModal();
         }
     }
 
